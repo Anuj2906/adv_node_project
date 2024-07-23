@@ -36,7 +36,7 @@ export const googleAuthCallback = async (req, res) => {
   if (!code) {
     return res.status(400).send('Authorization code not provided');
   }
-  console.log(code);
+  // console.log(code);
   try {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
@@ -46,12 +46,13 @@ export const googleAuthCallback = async (req, res) => {
       auth: oauth2Client,
       version: 'v2',
     });
-    console.log(oauth2);
+    // console.log(oauth2);
     const userinfo = await oauth2.userinfo.get();
     req.session.user = userinfo.data;
-    console.log(userinfo);
+    // console.log(userinfo);
+    // console.log(req.session.user);
     const token = jwt.sign(userinfo.data, JWT_SECRET);
-    console.log(token);
+    // console.log(token);
     res.cookie('token', token, { httpOnly: true });
     res.redirect('/'); // Redirects to the desired route after successful authentication
   } catch (error) {

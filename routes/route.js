@@ -12,8 +12,10 @@ router.get('/oauth-redirecturi', googleAuthCallback);
 
 router.get('/', (req, res) => {
     console.log({"foo" : "bar"});
-    // saveUserInfo(req, res);
-    res.send(req.session.user);
+    saveUserInfo(req, res);
+    console.log(req.session.user);
+    // res.send(req.session.user);
+    
 })
 
 router.post('/db-save', authenticate, createCustomer);

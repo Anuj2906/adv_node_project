@@ -40,7 +40,7 @@ export const googleAuthCallback = async (req, res) => {
   try {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
-
+    
     // Retrieve user info
     const oauth2 = google.oauth2({
       auth: oauth2Client,
